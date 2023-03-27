@@ -1,0 +1,35 @@
+- name: modify repository config
+  ansible.builtin.replace:
+    path: /etc/apk/repositories
+    regexp: '^#http'
+    line: 'http'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: update repository
+  community.general.apk:
+    update_cache: true
+  become: yes
+
+- name: Run setup-xorg-base
+  ansible.builtin.command:
+    cmd: setup-xorg-base
+
+- name: Run setup-devd
+  ansible.builtin.command:
+    cmd: setup-devd udev
+
+- name: Enable and start service dbus
+  ansible.builtin.service:
+    name: "{{ service.dbus.name }}"
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Enable and start service lightdm
+  ansible.builtin.service:
+    name: "{{ service.lightdm.name }}"
+    state: started
+    enabled: yes
+  become: yes

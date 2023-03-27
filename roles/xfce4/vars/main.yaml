@@ -1,0 +1,10 @@
+## apk pkg info
+apk:
+  pkgs: xfce4,xfce4-terminal,xfce4-screensaver,lightdm-gtk-greeter,dbus
+
+## service info
+service:
+  dbus:
+    name: dbus
+  lightdm:
+    name: lightdm
