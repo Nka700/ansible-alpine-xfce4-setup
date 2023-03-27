@@ -2,7 +2,7 @@
   ansible.builtin.replace:
     path: /etc/apk/repositories
     regexp: '^#http'
-    line: 'http'
+    replace: 'http'
     owner: root
     group: root
     mode: '0644'
